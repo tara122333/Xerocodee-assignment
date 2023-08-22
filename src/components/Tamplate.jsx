@@ -10,6 +10,7 @@ export default function Template() {
     const [signUp, setSignUp] = useState(false);
     const [formType, setFormType] = useState(false);
     const [lastName, setLastName] = useState("");
+    console.log(signUp);
     return (
         <div className="bg-white flex rounded-tr-2xl rounded-bl-2xl pt-4">
             <div className='flex  items-center justify-center pl-12'>

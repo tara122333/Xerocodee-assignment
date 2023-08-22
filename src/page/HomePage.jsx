@@ -1,6 +1,4 @@
-import { useState } from "react";
 import Template from "../components/Tamplate"
-
 const HomePage = () => {
     return (
         <>
