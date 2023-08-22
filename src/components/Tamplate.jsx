@@ -24,7 +24,7 @@ export default function Template() {
                         <div className='flex flex-col gap-2 w-1/2'>
                             <div className=''>
                                 {formType === false ?
-                                    (<SignUp setSignUp={setSignUp} setFirstName={setFirstName} setLastName={setLastName} />) :
+                                    (<SignUp setSignUp={setSignUp} setFirstName={setFirstName} setLastName={setLastName} setFormType={setFormType} />) :
                                     (<Login firstName={firstName} lastName={lastName} />)
                                 }
                             </div>
