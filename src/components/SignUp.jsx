@@ -41,9 +41,9 @@ function SignUp({ setSignUp, setFirstName, setLastName,setFormType }) {
         else if (signUpData.confirmPassword === '') {
             toast.error("confirmPassword required");
         }
-        if (signUpData.password === signUpData.confirmPassword) {
+        else if (signUpData.password === signUpData.confirmPassword) {
             try {
-                const response = await axios.post('http://localhost:4000/auth/signup', { credentials: signUpData });
+                const response = await axios.post('http://localhost:4000/signup', { credentials: signUpData });
                 if (response.status === 200) {
                     setSignUpData({
                         firstName: "",
@@ -53,6 +53,7 @@ function SignUp({ setSignUp, setFirstName, setLastName,setFormType }) {
                         confirmPassword: "",
                         fullname : ''
                     });
+                    toast.success("Signup success");
                     setFormType(true);
                 }
             } catch (error) {
@@ -76,7 +77,7 @@ function SignUp({ setSignUp, setFirstName, setLastName,setFormType }) {
     }
     console.log(signUpData);
     return (
-        <div className='flex flex-col' >
+        <div className='flex flex-col px-12' >
             <h1 className="w-full text-center text-black text-3xl font-bold"> Hello!</h1>
             <div className='flex justify-center items-center py-1'>
                 <div className="w-[150px] border border-slate-400 border-opacity-40"></div>

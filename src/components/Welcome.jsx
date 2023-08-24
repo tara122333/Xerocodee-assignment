@@ -1,5 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import logo from '../assets/logo.png'
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 
 const Welcome = () => {
@@ -10,13 +12,50 @@ const Welcome = () => {
     const [hostingOptions, setHostingOptions] = useState('');
     const [repo, setRepo] = useState('');
 
+    console.log("steps");
+    console.log(steps);
+
+    console.log("option");
+    console.log(option);
+
+    console.log("intro");
     console.log(intro);
+
+    console.log("hosting");
+    console.log(hosting);
+
+    const { _id } = useParams();
+    console.log("_id")
+    console.log(_id)
+
+    useEffect(()=>{
+        const getData = async()=>{
+            try {
+                const response = await axios.get(`http://localhost:4000/options/selected/data/${_id}`);
+                if(response.status === 200){
+                    console.log(response.data.selectedOptionsData)
+                    setHosting(response.data.selectedOptionsData.hosting)
+                    setSteps(response.data.selectedOptionsData.steps)
+                    setIntro(response.data.selectedOptionsData.intro);
+                    setOptions(response.data.selectedOptionsData.option);
+                    setHostingOptions(response.data.selectedOptionsData.hostingOptions);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getData();
+    },[_id])
 
     const handleChange = async () => {
         try {
-            // 
-            console.log("done");
-            setSteps(2);
+            if (intro === '') {
+                alert("Enter value");
+
+            }
+            else {
+                setSteps(2);
+            }
         } catch (error) {
             console.log(error)
         }
@@ -25,6 +64,22 @@ const Welcome = () => {
     const handleRepo = async () => {
         console.log("repo");
         setSteps(4);
+    }
+
+    const DataSave = async() => {
+        try {
+            const response = await axios.post(`http://localhost:4000/options/selected/${_id}`,{steps, intro, hosting, option, hostingOptions});
+            if(response.status === 200){
+                console.log("data saved");
+                alert("data saved");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const gitHubOperations = async()=>{
+        DataSave();
+        (window.location.href = `http://localhost:4000/auth/github/repo`);
     }
     return (
         <>
@@ -113,7 +168,6 @@ const Welcome = () => {
                                                     </span>
                                                 </div>
                                             </> : ''
-
                                         }
                                     </div>
                                 </div>
@@ -189,6 +243,7 @@ const Welcome = () => {
                                                 <span className={hostingOptions === 'aws' ? "px-16 flex justify-center items-center text-xl py-2 bg-[#1F64FF] text-white rounded border-2 border-[#1F64FF] cursor-pointer" : "px-16 flex justify-center items-center text-slate-950 text-xl py-2 border-2 rounded cursor-pointer"}
                                                     onClick={() => {
                                                         setHostingOptions('aws')
+                                                        // DataSave();
                                                     }}
                                                 >AWS</span>
                                             </div>
@@ -196,6 +251,7 @@ const Welcome = () => {
                                                 <span className={hostingOptions === 'github' ? "px-16 flex justify-center items-center text-xl py-2 bg-[#1F64FF] text-white rounded border-2 border-[#1F64FF] cursor-pointer" : "px-16 flex justify-center items-center text-slate-950 text-xl py-2 border-2 rounded cursor-pointer"}
                                                     onClick={() => {
                                                         setHostingOptions('github')
+                                                        gitHubOperations();
                                                     }}
                                                 >GitHub</span>
                                             </div>

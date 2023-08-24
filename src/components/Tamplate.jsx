@@ -4,6 +4,7 @@ import logo from '../assets/logo.png'
 import Vector from '../assets/Vector.jpg'
 import SignUp from './SignUp';
 import Login from './Login';
+import axios from 'axios';
 
 export default function Template() {
     const [firstName, setFirstName] = useState("");
@@ -11,6 +12,12 @@ export default function Template() {
     const [formType, setFormType] = useState(false);
     const [lastName, setLastName] = useState("");
     console.log(signUp);
+    const AuthWithGithub = async () => {
+        (window.location.href = `http://localhost:4000/auth/github`);
+    }
+    const AuthWithGoogle = () => {
+        (window.location.href = `http://localhost:4000/auth/google`);
+    }
     return (
         <div className="bg-white flex rounded-tr-2xl rounded-bl-2xl pt-4">
             <div className='flex  items-center justify-center pl-12'>
@@ -30,23 +37,29 @@ export default function Template() {
                             </div>
                             <div className="w-full h-5 text-center text-slate-950 text-opacity-50 text-sm font-extrabold capitalize leading-[21px]">OR</div>
                             <div className='flex w-full justify-evenly'>
-                                <button className="bg-white rounded-lg border flex justify-center items-center py-1 text-sm px-4" >
+                                <button className="bg-white rounded-lg border flex justify-center items-center py-1 text-sm px-4"
+                                    onClick={AuthWithGoogle}
+                                >
                                     {formType === false ? ("Sign Up") : ("Log In")}
                                     With Google
                                     <img className="w-6 h-6 ml-2" alt=""
                                         src={'https://static.vecteezy.com/system/resources/previews/012/871/371/original/google-search-icon-google-product-illustration-free-png.png'}
                                     />
                                 </button>
-                                <button className="bg-white rounded-lg border flex justify-center items-center py-1 text-sm px-4">
+                                <button className="bg-white rounded-lg border flex justify-center items-center py-1 text-sm px-4"
+                                    onClick={AuthWithGithub}
+                                >
                                     {formType === false ? ("Sign Up") : ("Log in")}
                                     With Github
                                     <img className="w-6 h-6 ml-2" alt=''
                                         src={'https://cdn-icons-png.flaticon.com/512/25/25231.png'} />
                                 </button>
                             </div>
-                            <div className="w-56 h-[19px] mx-auto"><span className="text-slate-950 text-opacity-50 text-sm font-normal leading-[21px] ">Already have an Account ? </span>
-                                <span className="text-blue-600 text-sm font-medium cursor-pointer" 
-                                onClick={()=>{setFormType(!formType)}}
+                            <div className="w-56 h-[19px] mx-auto"><span className="text-slate-950 text-opacity-50 text-sm font-normal leading-[21px] ">
+                                Already have an Account ?
+                            </span>
+                                <span className="text-blue-600 text-sm font-medium cursor-pointer"
+                                    onClick={() => { setFormType(!formType) }}
                                 >{formType === true ? ("Sign Up") : ("Log in")}</span>
                             </div>
                         </div>
