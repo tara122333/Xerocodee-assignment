@@ -4,7 +4,6 @@ import logo from '../assets/logo.png'
 import Vector from '../assets/Vector.jpg'
 import SignUp from './SignUp';
 import Login from './Login';
-import axios from 'axios';
 
 export default function Template() {
     const [firstName, setFirstName] = useState("");
