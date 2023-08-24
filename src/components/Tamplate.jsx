@@ -12,10 +12,10 @@ export default function Template() {
     const [lastName, setLastName] = useState("");
     console.log(signUp);
     const AuthWithGithub = async () => {
-        (window.location.href = `http://localhost:4000/auth/github`);
+        (window.location.href = `https://xerocodeeassignment.onrender.com/auth/github`);
     }
     const AuthWithGoogle = () => {
-        (window.location.href = `http://localhost:4000/auth/google`);
+        (window.location.href = `https://xerocodeeassignment.onrender.com/auth/google`);
     }
     return (
         <div className="bg-white flex rounded-tr-2xl rounded-bl-2xl pt-4">

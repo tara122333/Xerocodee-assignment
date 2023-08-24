@@ -68,7 +68,7 @@ const Welcome = () => {
 
     const DataSave = async() => {
         try {
-            const response = await axios.post(`http://localhost:4000/options/selected/${_id}`,{steps, intro, hosting, option, hostingOptions});
+            const response = await axios.post(`https://xerocodeeassignment.onrender.com/options/selected/${_id}`,{steps, intro, hosting, option, hostingOptions});
             if(response.status === 200){
                 console.log("data saved");
                 alert("data saved");
@@ -79,7 +79,7 @@ const Welcome = () => {
     }
     const gitHubOperations = async()=>{
         DataSave();
-        (window.location.href = `http://localhost:4000/auth/github/repo`);
+        (window.location.href = `https://xerocodeeassignment.onrender.com/auth/github/repo`);
     }
     return (
         <>
@@ -192,46 +192,6 @@ const Welcome = () => {
                                             >XeroCodee Hosting</span>
                                         </div>
                                     </div>
-                                    {/* <div className="flex gap-3 items-center w-full justify-center py-12">
-                                    {
-                                        option === 'organisation' ? <>
-                                            <div>
-                                                <input
-                                                    type="text"
-                                                    placeholder={"Organisation Name"}
-                                                    className="w-80 border text-gray-600 outline-none rounded px-5 py-2 font-medium"
-                                                    value={intro}
-                                                    onChange={(e) => setIntro(e.target.value)}
-                                                />
-                                            </div>
-                                            <div className="flex items-center justify-center">
-                                                <span className="px-5 cursor-pointer py-2 bg-blue-600 rounded text-white"
-                                                    onClick={handleChange}
-                                                >
-                                                    SUBMIT
-                                                </span>
-                                            </div>
-                                        </> : option === 'company' ? <>
-                                            <div>
-                                                <input
-                                                    type="text"
-                                                    placeholder={"Company Name"}
-                                                    className="w-80 border text-gray-600 outline-none rounded px-5 py-2 font-medium"
-                                                    value={intro}
-                                                    onChange={(e) => setIntro(e.target.value)}
-                                                />
-                                            </div>
-                                            <div className="flex items-center justify-center">
-                                                <span className="cursor-pointer px-5 py-2 bg-blue-600 rounded text-white"
-                                                    onClick={handleChange}
-                                                >
-                                                    SUBMIT
-                                                </span>
-                                            </div>
-                                        </> : ''
-
-                                    }
-                                </div> */}
                                 </div>
                             </>
                         ) : steps === 3 ? (
@@ -243,7 +203,6 @@ const Welcome = () => {
                                                 <span className={hostingOptions === 'aws' ? "px-16 flex justify-center items-center text-xl py-2 bg-[#1F64FF] text-white rounded border-2 border-[#1F64FF] cursor-pointer" : "px-16 flex justify-center items-center text-slate-950 text-xl py-2 border-2 rounded cursor-pointer"}
                                                     onClick={() => {
                                                         setHostingOptions('aws')
-                                                        // DataSave();
                                                     }}
                                                 >AWS</span>
                                             </div>

@@ -8,7 +8,7 @@ const Github = () => {
     useEffect(() => {
         const UserDataWithToken = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/options/${_id}`);
+                const response = await axios.get(`https://xerocodeeassignment.onrender.com/options/${_id}`);
                 console.log(response);
                 if (response.status === 200) {
                     navigate(`/home/${_id}`);

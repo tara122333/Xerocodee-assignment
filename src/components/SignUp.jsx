@@ -43,7 +43,7 @@ function SignUp({ setSignUp, setFirstName, setLastName,setFormType }) {
         }
         else if (signUpData.password === signUpData.confirmPassword) {
             try {
-                const response = await axios.post('http://localhost:4000/signup', { credentials: signUpData });
+                const response = await axios.post('https://xerocodeeassignment.onrender.com/signup', { credentials: signUpData });
                 if (response.status === 200) {
                     setSignUpData({
                         firstName: "",
