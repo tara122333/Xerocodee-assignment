@@ -1,30 +1,34 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Github = () => {
-    const { token } = useParams();
-    console.log(token);
+    const { _id } = useParams();
+    const navigate = useNavigate();
     useEffect(() => {
-        if (token) {
-            const UserDataWithToken = async () => {
-                try {
-                    localStorage.setItem("xerocodeeToken", JSON.stringify({ token }));
-                    const response = await axios.get("http://localhost:4000/user");
-                    console.log(response);
-                } catch (error) {
-                    console.log(error)
+        const UserDataWithToken = async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/options/${_id}`);
+                console.log(response);
+                if (response.status === 200) {
+                    navigate(`/home/${_id}`);
                 }
+                else {
+                    console.log("User not found");
+                }
+            } catch (error) {
+                console.log(error)
             }
-            UserDataWithToken();
         }
-    },[token])
-  return (
-    <>
+        UserDataWithToken();
 
-    </>
+    })
+    return (
+        <>
 
-  )
+        </>
+
+    )
 }
 
 export default Github
