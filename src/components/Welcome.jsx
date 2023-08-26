@@ -31,7 +31,7 @@ const Welcome = () => {
     useEffect(()=>{
         const getData = async()=>{
             try {
-                const response = await axios.get(`http://localhost:4000/options/selected/data/${_id}`);
+                const response = await axios.get(`https://xerocodeeassignment.onrender.com/options/selected/data/${_id}`);
                 if(response.status === 200){
                     console.log(response.data.selectedOptionsData)
                     setHosting(response.data.selectedOptionsData.hosting)
