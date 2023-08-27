@@ -9,10 +9,10 @@ const Google = () => {
             try {
                 const response = await axios.get(`https://xerocodeeassignment.onrender.com/options/${_id}`);
                 console.log(response);
-                if(response.status === 200){
+                if (response.status === 200) {
                     navigate(`/home/${_id}`);
                 }
-                else{
+                else {
                     console.log("User not found");
                 }
             } catch (error) {
@@ -24,7 +24,7 @@ const Google = () => {
     })
     return (
         <div>
-            Google
+            <h1>Wait for some time server speed are slow.. auto redirect after some time....</h1>
         </div>
     )
 }

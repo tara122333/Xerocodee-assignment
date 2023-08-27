@@ -7,6 +7,7 @@ const Github = () => {
     const navigate = useNavigate();
     useEffect(() => {
         const UserDataWithToken = async () => {
+            localStorage.setItem("githubId", _id);
             try {
                 const response = await axios.get(`https://xerocodeeassignment.onrender.com/options/${_id}`);
                 console.log(response);
@@ -22,10 +23,10 @@ const Github = () => {
         }
         UserDataWithToken();
 
-    })
+    },[_id])
     return (
         <>
-
+            <h1>Wait for some time server speed are slow.. auto redirect after some time....</h1>
         </>
 
     )

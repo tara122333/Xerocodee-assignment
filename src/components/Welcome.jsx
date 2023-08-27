@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import logo from '../assets/logo.png'
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 
@@ -10,7 +10,7 @@ const Welcome = () => {
     const [intro, setIntro] = useState('');
     const [hosting, setHosting] = useState('');
     const [hostingOptions, setHostingOptions] = useState('');
-    const [repo, setRepo] = useState('');
+    const [repo, setRepo] = useState([]);
 
     console.log("steps");
     console.log(steps);
@@ -28,11 +28,11 @@ const Welcome = () => {
     console.log("_id")
     console.log(_id)
 
-    useEffect(()=>{
-        const getData = async()=>{
+    useEffect(() => {
+        const getData = async () => {
             try {
                 const response = await axios.get(`https://xerocodeeassignment.onrender.com/options/selected/data/${_id}`);
-                if(response.status === 200){
+                if (response.status === 200) {
                     console.log(response.data.selectedOptionsData)
                     setHosting(response.data.selectedOptionsData.hosting)
                     setSteps(response.data.selectedOptionsData.steps)
@@ -45,7 +45,7 @@ const Welcome = () => {
             }
         }
         getData();
-    },[_id])
+    }, [_id])
 
     const handleChange = async () => {
         try {
@@ -66,20 +66,45 @@ const Welcome = () => {
         setSteps(4);
     }
 
-    const DataSave = async() => {
+    const DataSave = async () => {
         try {
-            const response = await axios.post(`https://xerocodeeassignment.onrender.com/options/selected/${_id}`,{steps, intro, hosting, option, hostingOptions});
-            if(response.status === 200){
-                console.log("data saved");
-                alert("data saved");
+            const response = await axios.post(`https://xerocodeeassignment.onrender.com/options/selected/${_id}`, { steps, intro, hosting, option, hostingOptions });
+            if (response.status === 200) {
+                // console.log("data saved");
+                // alert("data saved");
+                return true;
             }
+            return false;
         } catch (error) {
             console.log(error);
         }
     }
-    const gitHubOperations = async()=>{
-        DataSave();
-        (window.location.href = `https://xerocodeeassignment.onrender.com/auth/github/repo`);
+    const gitHubOperations = async () => {
+        const flag = await DataSave();
+        console.log("flag");
+        console.log(flag);
+        if (flag) {
+            const githubId = localStorage.getItem("githubId");
+            if (githubId !== "undefined") {
+                console.log("githubId");
+                console.log(githubId);
+                const response = await axios.get(`http://localhost:4000/options/repositories/${githubId}`)
+                if(response.status === 200){
+                    console.log(response.data.repositories);
+                    setRepo(response.data.repositories)
+                }
+                else if(response.status === 201){
+                    alert(response.messsage);
+                }
+                else{
+                    console.log("error");
+                }
+            }
+            else {
+                (window.location.href = `http://localhost:4000/auth/github`);
+            }
+        }
+
     }
     return (
         <>
@@ -215,24 +240,19 @@ const Welcome = () => {
                                                 >GitHub</span>
                                             </div>
                                         </div>
-                                        <div className="flex gap-3 items-center w-full justify-center py-12">
+                                        <div className="flex gap-3 items-center w-full justify-center py-2">
                                             {
                                                 hostingOptions === 'github' ? <>
-                                                    <div>
-                                                        <input
-                                                            type="text"
-                                                            placeholder={"Github Repository"}
-                                                            className="w-80 border text-gray-600 outline-none rounded px-5 py-2 font-medium"
-                                                            value={repo}
-                                                            onChange={(e) => setRepo(e.target.value)}
-                                                        />
-                                                    </div>
-                                                    <div className="flex items-center justify-center">
-                                                        <span className="px-5 cursor-pointer py-2 bg-blue-600 rounded text-white"
-                                                            onClick={handleRepo}
-                                                        >
-                                                            SUBMIT
-                                                        </span>
+                                                    <div className="h-40 overflow-y-scroll py-2">
+                                                        {
+                                                            repo.map((item)=>(
+                                                                <Link to={item.clone_url} target="__blank" className="flex gap-5 border py-1 px-3 hover:bg-red-100"
+                                                                >
+                                                                    <h1><span className="font-bold">Repo Name </span>: {item.name}</h1>
+                                                                    <h1><span className="font-bold">Repo Url</span> : {item.clone_url}</h1>
+                                                                </Link>
+                                                            ))
+                                                        }
                                                     </div>
                                                 </> : ''
 
