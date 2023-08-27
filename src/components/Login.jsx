@@ -19,8 +19,6 @@ function Login({ firstName, lastName }) {
     }
     const submitHandler = async (e) => {
         e.preventDefault();
-        // console.log(loginData);
-        // navigate("/home/123")
         if (loginData.email === '') {
             toast.error("email required");
         }
@@ -30,7 +28,6 @@ function Login({ firstName, lastName }) {
         else {
             try {
                 const response = await axios.post("https://xerocodeeassignment.onrender.com/signin", { credentials: loginData })
-                console.log(response);
                 if (response.status === 200) {
                     toast.success("Login success");
                     navigate(`/home/${response.data.user._id}`);

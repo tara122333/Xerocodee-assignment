@@ -63,19 +63,8 @@ function SignUp({ setSignUp, setFirstName, setLastName,setFormType }) {
         else {
             toast.error("password are not same");
 
-        }
-        // setSignUpData({
-        //     firstName: "",
-        //     lastName: "",
-        //     email: "",
-        //     password: "",
-        //     confirmPassword: "",
-        // });
-        // setSignUp(true);
-
-        
+        }        
     }
-    console.log(signUpData);
     return (
         <div className='flex flex-col px-12' >
             <h1 className="w-full text-center text-black text-3xl font-bold"> Hello!</h1>

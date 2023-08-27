@@ -12,28 +12,13 @@ const Welcome = () => {
     const [hostingOptions, setHostingOptions] = useState('');
     const [repo, setRepo] = useState([]);
 
-    console.log("steps");
-    console.log(steps);
-
-    console.log("option");
-    console.log(option);
-
-    console.log("intro");
-    console.log(intro);
-
-    console.log("hosting");
-    console.log(hosting);
-
     const { _id } = useParams();
-    console.log("_id")
-    console.log(_id)
 
     useEffect(() => {
         const getData = async () => {
             try {
                 const response = await axios.get(`https://xerocodeeassignment.onrender.com/options/selected/data/${_id}`);
                 if (response.status === 200) {
-                    console.log(response.data.selectedOptionsData)
                     setHosting(response.data.selectedOptionsData.hosting)
                     setSteps(response.data.selectedOptionsData.steps)
                     setIntro(response.data.selectedOptionsData.intro);
@@ -61,17 +46,10 @@ const Welcome = () => {
         }
     }
 
-    const handleRepo = async () => {
-        console.log("repo");
-        setSteps(4);
-    }
-
     const DataSave = async () => {
         try {
             const response = await axios.post(`https://xerocodeeassignment.onrender.com/options/selected/${_id}`, { steps, intro, hosting, option, hostingOptions });
             if (response.status === 200) {
-                // console.log("data saved");
-                // alert("data saved");
                 return true;
             }
             return false;
@@ -81,16 +59,11 @@ const Welcome = () => {
     }
     const gitHubOperations = async () => {
         const flag = await DataSave();
-        console.log("flag");
-        console.log(flag);
         if (flag) {
             const githubId = localStorage.getItem("githubId");
             if (githubId !== "undefined") {
-                console.log("githubId");
-                console.log(githubId);
                 const response = await axios.get(`https://xerocodeeassignment.onrender.com/options/repositories/${githubId}`)
                 if(response.status === 200){
-                    console.log(response.data.repositories);
                     setRepo(response.data.repositories)
                 }
                 else if(response.status === 201){

@@ -10,7 +10,6 @@ const Github = () => {
             localStorage.setItem("githubId", _id);
             try {
                 const response = await axios.get(`https://xerocodeeassignment.onrender.com/options/${_id}`);
-                console.log(response);
                 if (response.status === 200) {
                     navigate(`/home/${_id}`);
                 }
