@@ -62,6 +62,7 @@ const Welcome = () => {
         if (flag) {
             const githubId = localStorage.getItem("githubId");
             if (githubId !== "undefined" && githubId != null) {
+
                 const response = await axios.get(`https://xerocodeeassignment.onrender.com/options/repositories/${githubId}`)
                 if(response.status === 200){
                     setRepo(response.data.repositories)
@@ -74,6 +75,7 @@ const Welcome = () => {
                 }
             }
             else {
+                
                 (window.location.href = `https://xerocodeeassignment.onrender.com/auth/github`);
             }
         }
