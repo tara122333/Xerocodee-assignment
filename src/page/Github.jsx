@@ -23,7 +23,7 @@ const Github = () => {
         }
         UserDataWithToken();
 
-    },[_id])
+    })
     return (
         <>
             <h1>Wait for some time server speed are slow.. auto redirect after some time....</h1>

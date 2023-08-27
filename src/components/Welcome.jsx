@@ -88,7 +88,7 @@ const Welcome = () => {
             if (githubId !== "undefined") {
                 console.log("githubId");
                 console.log(githubId);
-                const response = await axios.get(`http://localhost:4000/options/repositories/${githubId}`)
+                const response = await axios.get(`https://xerocodeeassignment.onrender.com/options/repositories/${githubId}`)
                 if(response.status === 200){
                     console.log(response.data.repositories);
                     setRepo(response.data.repositories)
@@ -101,7 +101,7 @@ const Welcome = () => {
                 }
             }
             else {
-                (window.location.href = `http://localhost:4000/auth/github`);
+                (window.location.href = `https://xerocodeeassignment.onrender.com/auth/github`);
             }
         }
 
