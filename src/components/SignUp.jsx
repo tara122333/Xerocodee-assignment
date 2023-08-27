@@ -70,7 +70,7 @@ function SignUp({ setSignUp, setFirstName, setLastName,setFormType }) {
             <h1 className="w-full text-center text-black text-3xl font-bold"> Hello!</h1>
             <div className='flex justify-center items-center py-1'>
                 <div className="w-[150px] border border-slate-400 border-opacity-40"></div>
-                <div className="w-[152px] h-[21px] text-center text-slate-950 text-opacity-50 text-sm font-bold capitalize leading-[21px]">Create your Account</div>
+                <div className="w-[152px] h-[21px] text-center text-slate-950 text-opacity-50 text-sm font-bold capitalize leading-[21px]">Create</div>
                 <div className="w-[150px] h-[0px] border border-slate-400 border-opacity-40"></div>
             </div>
             <form className='flex flex-col gap-4' onSubmit={submitHandler} autoComplete="none" >
